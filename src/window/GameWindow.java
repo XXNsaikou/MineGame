@@ -112,8 +112,8 @@ public class GameWindow extends JFrame {
 			break;
 		case 2:
 			this.mineCount = 99;
-			this.btncols = 16;
-			this.btnrows = 30;
+			this.btncols = 30;
+			this.btnrows = 16;
 			// 设置中间面板的大小
 			centerPanel.setSize(1130, 640);
 			this.setSize(1066, 640);
@@ -195,7 +195,6 @@ public class GameWindow extends JFrame {
 		 try {
 			createMines(mineCount,btnrows,btncols);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		// 创建按钮 ，调用下面方法

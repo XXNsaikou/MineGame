@@ -158,7 +158,7 @@ public class buttonClick implements ActionListener {
 
 	// 如果踩到地雷则显示出地图上所有的地雷
 	private void dieShow() {
-		for (int i = 0; i < GameMain.GW.btncols; i++) {
+		for (int i = 0; i < GameMain.GW.btnrows; i++) {
 			for (int j = 0; j < GameMain.GW.btns2[i].length; j++) {
 				JButton btn = GameMain.GW.btns2[i][j];
 				for (int k = 0; k < GameMain.GW.mineS.length; k++) {
@@ -170,8 +170,8 @@ public class buttonClick implements ActionListener {
 				}
 			}
 		}
-		for (int i = 0; i < GameMain.GW.btncols; i++) {
-			for (int j = 0; j < GameMain.GW.btnrows; j++) {
+		for (int i = 0; i < GameMain.GW.btnrows; i++) {
+			for (int j = 0; j < GameMain.GW.btncols; j++) {
 				for (int k = 0; k < GameMain.GW.mineS.length; k++) {
 					GameMain.GW.btns2[i][j].setEnabled(false);
 				}
