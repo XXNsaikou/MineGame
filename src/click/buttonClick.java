@@ -6,6 +6,9 @@ package click;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Vector;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -16,12 +19,17 @@ import window.GameWindow;
 
 public class buttonClick implements ActionListener {
 	JButton currentBtn;
+	static HashSet<JButton> safeButton = new HashSet<JButton>();
 	private static buttonClick bc = new buttonClick();
 
 	public static buttonClick getButtonClickIns() {
 		return bc;
 	}
 
+	static ImageIcon[] images = new ImageIcon[]{
+			new ImageIcon("images/0.png"),new ImageIcon("images/1.png"),new ImageIcon("images/2.png"),new ImageIcon("images/3.png"),new ImageIcon("images/4.png"),new ImageIcon("images/5.png"),new ImageIcon("images/6.png"),new ImageIcon("images/7.png"),new ImageIcon("images/8.png")
+	};
+	static ImageIcon image = new ImageIcon("images/0.png");
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		/**
@@ -36,7 +44,9 @@ public class buttonClick implements ActionListener {
 		if (isTreadMine(clickbtn)) {
 			// 显示所有的雷
 			dieShow();
+			buttonClick.safeButton.clear();
 		} else {
+			safeButton.add(clickbtn);
 			int minecount = nearMines(clickbtn);
 			// JOptionPane.showMessageDialog(null, "周围有"+minecount+"个雷");
 			// 将所点击的按钮，从二维数组中移除
@@ -47,11 +57,11 @@ public class buttonClick implements ActionListener {
 			// 判断周围有没有雷
 			if (minecount > 0) {
 				// 拼接数字图片的名称
-				String imageNum = "images/" + minecount + ".png";
-				ImageIcon image = new ImageIcon(imageNum);
-				clickbtn.setIcon(image);
+//				String imageNum = "images/" + minecount + ".png";
+//				ImageIcon image = new ImageIcon(imageNum);
+				clickbtn.setIcon(images[minecount]);
 			} else {
-				ImageIcon image = new ImageIcon("images/0.png");
+//				ImageIcon image = new ImageIcon("images/0.png");
 				clickbtn.setIcon(image);
 				// 继续完成周围8个按钮的点击
 				JButton[] nearbtns = getNearBtn(clickbtn);
@@ -62,10 +72,11 @@ public class buttonClick implements ActionListener {
 					}
 				}
 				// 重绘UI面板
-				GameMain.GW.repaint();
-				
-
+				//GameMain.GW.repaint();
 			}
+		}
+		if(safeButton!=null && safeButton.size()==GameMain.GW.safeButton){
+			JOptionPane.showMessageDialog(null, "恭喜你，完成所有雷的排除！！ <(￣︶￣)>　");
 		}
 	}
 

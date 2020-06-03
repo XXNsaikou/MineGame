@@ -6,6 +6,7 @@ package window;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.util.HashMap;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -35,6 +36,7 @@ public class GameWindow extends JFrame {
 	String[] mines0 = new String[10];
 	String[] mines1 = new String[40];
 	String[] mines2 = new String[99];
+
 	// 存放雷的数组
 	public String[] mineS;
 	//已探明的雷
@@ -56,7 +58,7 @@ public class GameWindow extends JFrame {
 	private static JPanel rightPanel = new JPanel();
 	private static JPanel bottomPanel = new JPanel();
 
-	public GameWindow() {
+	public GameWindow() throws Exception {
 		// 先生成三个数量的雷
 		try {
 			createMines(mineCount, btnrows, btncols);
@@ -77,7 +79,7 @@ public class GameWindow extends JFrame {
 	}
 
 	// 初始化标题及窗口
-	public void initTitle() {
+	public void initTitle() throws Exception {
 		// 初始化标题栏
 		this.setTitle("我的扫雷V2.0");
 		this.setIconImage(new ImageIcon("images/xxx.png").getImage());
@@ -96,7 +98,7 @@ public class GameWindow extends JFrame {
 			if(gameTimes<1) {
 				addMenu();
 			}
-			safeButton=9*9-10;
+			safeButton=71;
 			break;
 		case 1:
 			this.mineCount = 40;
@@ -106,9 +108,8 @@ public class GameWindow extends JFrame {
 			centerPanel.setSize(640, 640);
 			this.setSize(576, 645);
 			// 居中
-			
 			this.setLocationRelativeTo(null);
-			safeButton=16*16-40;
+			safeButton=216;
 			break;
 		case 2:
 			this.mineCount = 99;
@@ -122,7 +123,7 @@ public class GameWindow extends JFrame {
 			if(gameTimes<1) {
 				addMenu();
 			}
-			safeButton=16*30-99;
+			safeButton=381;
 			break;
 		}
 		this.setVisible(true);
@@ -132,7 +133,7 @@ public class GameWindow extends JFrame {
 	}
 
 	// 完成菜单的添加
-	private void addMenu() {
+	private void addMenu() throws Exception {
 		// 创建一个菜单栏
 		JMenuBar menubar = new JMenuBar();
 
@@ -195,6 +196,7 @@ public class GameWindow extends JFrame {
 		 try {
 			createMines(mineCount,btnrows,btncols);
 		} catch (Exception e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		// 创建按钮 ，调用下面方法
@@ -215,31 +217,37 @@ public class GameWindow extends JFrame {
 		 * @version create time:2020年2月28日 下午5:07:11
 		 */
 		
-		mines0 = cmt.createMines(10, 9, 9);
-		mines1 = cmt.createMines(40, 16, 16);
-		mines2 = cmt.createMines(99, 16, 30);
+//		mines0 = cmt.createMines(10, 9, 9);
+////		mines1 = cmt.createMines(40, 16, 16);
+////		mines2 = cmt.createMines(99, 16, 30);
+		mineS=cmt.createMines(mineCount,btnrows,btncols);
+
 	}
 
 	// 完成窗体按钮的添加
-	public void initPanel(int diff) {
+	public void initPanel(int diff) throws Exception {
 		switch (difficult) {
 		// 初级难度:
 		case 0:
 			btns = new JButton[btnrows][btncols];
 			btns2 = new JButton[btnrows][btncols];
-			mineS=mines0;
-			safeButton=60;
+			createMines(10, 9, 9);
+//			mineS=mines0;
+
+			safeButton=71;
 			break;
 		case 1:
 			btns = new JButton[btnrows][btncols];
 			btns2 = new JButton[btnrows][btncols];
-			mineS=mines1;
+			createMines(40, 16, 16);
+//			mineS=mines1;
 			safeButton=216;
 			break;
 		case 2:
 			btns = new JButton[16][30];
 			btns2 = new JButton[16][30];
-			mineS=mines2;
+			createMines(99, 16, 30);
+//			mineS=mines2;
 			safeButton=381;
 			break;
 		}
@@ -280,5 +288,6 @@ public class GameWindow extends JFrame {
 			}
 		}
 	}
+
 
 }

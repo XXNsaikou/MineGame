@@ -33,27 +33,53 @@ public class MenuItemClick implements ActionListener {
 		// 点击退出按钮程序退出
 		if (type.equals("exit")) {
 			System.exit(0);
-		} else
-		// 点击初级按钮
-		if (type.equals("base")) {
+		} // 点击初级按钮
+		 else if (type.equals("base")) {
 			// initPanel(9, 9, 10);
+			buttonClick.safeButton.clear();
 			GameWindow.changeDiff(0);
-			GameMain.GW.initTitle();
-			GameMain.GW.initPanel(0);
+			try {
+				GameMain.GW.initTitle();
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
+			try {
+				GameMain.GW.initPanel(0);
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
 		} else
 		// 点击中级按钮
 		if (type.equals("middle")) {
+			buttonClick.safeButton.clear();
 			// initPanel(16, 16, 40);
 			GameWindow.changeDiff(1);
-			GameMain.GW.initTitle();
-			GameMain.GW.initPanel(1);
+			try {
+				GameMain.GW.initTitle();
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
+			try {
+				GameMain.GW.initPanel(1);
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
 		} else
 		// 点击高级按钮
 		if (type.equals("high")) {
+			buttonClick.safeButton.clear();
 			// initPanel(16, 30, 99);
 			GameWindow.changeDiff(2);
-			GameMain.GW.initTitle();
-			GameMain.GW.initPanel(2);
+			try {
+				GameMain.GW.initTitle();
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
+			try {
+				GameMain.GW.initPanel(2);
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
 		} else
 		// 点击关于按钮
 		if (type.equals("about")) {
